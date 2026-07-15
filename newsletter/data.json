@@ -1,0 +1,54 @@
+{
+  "displayDate": "July 12, 2026",
+  "splName": "Riyaan Rath",
+  "splMessage": "Hey Scouts,\n\nSummer camp is next week! We have our gear pull on Wednesday at 7PM. Make sure you are there if you are going to summer camp.\n\nYIS,\nRiyaan Rath",
+  "topOfMind": [
+    { "label": "Northeast Trek", "date": "July 10-14, 2026" },
+    { "label": "Troop 8 Meeting", "date": "July 13, 2026" },
+    { "label": "Summer Camp Gear Pull", "date": "July 15, 2026" },
+    { "label": "Summer Camp", "date": "July 19-25, 2026" },
+    { "label": "Troop 8 Meeting", "date": "July 26, 2026", "note": "LAST MEETING OF THE YEAR!" },
+    { "label": "Northeast Trek", "date": "August 5-9, 2026" },
+    { "label": "Troop 8 Meeting", "date": "August 31, 2026", "note": "FIRST MEETING OF THE YEAR!" }
+  ],
+  "spotlights": [
+    {
+      "title": "Change to Troop 8 Payment Methods",
+      "body": "Going forward the following will be accepted as payments for Troop 8 activities: Zelle, Checks, and Cash.\n\nVenmo is no longer an acceptable method of payment effective immediately.\n\nThank you,\nMr. Brockmeyer"
+    },
+    {
+      "title": "2027 Philmont Scout Reservation",
+      "body": "Troop 8's Philmont 2027 crew has one spot remaining. This is your opportunity to hike, raft and adventure through Philmont Scout Ranch. If you will be 14, First Class ranked or higher, and have or will have successfully completed at least one Northeast Trek, and are interested, please contact Mr. James (bjaust@gmail.com) for details."
+    },
+    {
+      "title": "Troop 8 Summer Camp",
+      "body": "Summer Camp July 19-25, 2026 at Camp Somers. Scouts will enjoy a week canoeing, swimming, playing outdoor games, watching and performing campfire skits, all while earning merit badges. Signup link and more information to follow. For inquiries please reach out to Patricia Hogan (colmmoo@yahoo.com; 201-486-6548)."
+    },
+    {
+      "title": "Service Projects",
+      "body": "“Alone we can do so little; together we can do so much.” — Helen Keller\n\nThe 2026 SERV Award year runs from January 1st to December 31, 2026. Check the newsletter often, as it is never too early to start earning service hours for 2026! Scouts will announce ongoing service projects at the meetings. Please support your fellow scouts and the community by volunteering your time!"
+    },
+    {
+      "title": "Eagle Scout Service Project for John Peck",
+      "body": "For my Eagle Scout project, I am creating a new program that will provide free swim lessons and water safety instruction to children who may not otherwise have access to formal swim education. The lessons will take place at Canoe Brook Country Club in partnership with the Canoe Brook Foundation, running for two sessions in May on Saturday mornings, serving between 10 and 30 participants. I will be organizing a team of 10-20 lifeguard-certified volunteer instructors to help. If interested, scouts should fill out the sign-up form."
+    },
+    {
+      "title": "Troop 8 Rocketry",
+      "body": "Anyone who would like more information is welcome to contact Tony or Daniel at andong.lintony@gmail.com or danielgallagher@chatham-nj.org."
+    },
+    {
+      "title": "2027 Florida Sea Base Out Island Adventure",
+      "body": "April 10 - April 16, 2027. Contact Mr. Haller at 215.704.7974 (drewhaller@yahoo.com) or Mr. Kamionek at 201.207.5821 (skamionek@gmail.com). Scouts must be First Class and 13 years old by April 10, 2027. This Interest Form must be turned in with a $200 deposit by September 1, 2026. Estimated cost is approximately $2,600."
+    },
+    {
+      "title": "New Cell Phone Policy",
+      "body": "Troop 8 leadership recently evaluated how cell phone use is impacting the scouting experience for the boys and everyone involved. Based on this assessment, the Committee approved a new Cell Phone Policy, available for download."
+    }
+  ],
+  "serviceProjects": [],
+  "announcements": [
+    { "text": "Return Troop Gear: IMPORTANT - Please return any Troop gear in your possession at our next in-person meeting." },
+    { "text": "Changes to BSA rules on Adult Registration for Participation in Meetings and Trips: all adults participating in overnight troop activities must register as ASMs, which includes completion of an application with a criminal background check, mandatory Youth Protection training, and a Volunteer Screening Database check." },
+    { "text": "Recruiting: New scouts are joining Troop 8 every month. If your scout has a friend that would like to learn more about our Troop they are welcome to join any live meeting or upcoming Troop event." }
+  ]
+}

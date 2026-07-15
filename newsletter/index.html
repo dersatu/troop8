@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Weekly Newsletter — Troop 8 Chatham, NJ</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, Verdana, Helvetica, sans-serif;
+    background:#F1F1F1;
+    color:#36495F;
+    line-height:1.4;
+}
+
+a{
+    color:#DE4E3A;
+}
+
+.toolbar{
+    background:#234b79;
+    color:white;
+    text-align:center;
+    padding:14px 15px;
+    font-size:13px;
+}
+
+.toolbar a, .toolbar button{
+    color:white;
+    text-decoration:underline;
+    background:none;
+    border:none;
+    font-size:13px;
+    cursor:pointer;
+    font-family:inherit;
+    margin:0 8px;
+    padding:0;
+}
+
+.toolbar a:hover, .toolbar button:hover{
+    opacity:.8;
+}
+
+.page{
+    max-width:660px;
+    margin:20px auto;
+    padding:0 10px;
+}
+
+.shell{
+    background:#ECF0F1;
+    border:1px solid #36495F;
+}
+
+.shell img.banner{
+    display:block;
+    width:100%;
+    height:auto;
+}
+
+.section{
+    padding:15px 20px;
+}
+
+.divider{
+    height:1px;
+    background:#000;
+    margin:0 20px;
+}
+
+.issue-date{
+    text-align:center;
+    font-size:13px;
+    color:#36495F;
+    padding:8px 20px 0;
+}
+
+.section-title{
+    text-align:center;
+    font-weight:bold;
+    font-size:20px;
+    margin-bottom:10px;
+}
+
+.section p{
+    white-space:pre-line;
+    margin-bottom:10px;
+}
+
+.section p:last-child{
+    margin-bottom:0;
+}
+
+.band{
+    background:#ced8ee;
+}
+
+.band .section-title{
+    color:#284FA1;
+    font-size:20px;
+}
+
+.event-list, .announcement-list{
+    list-style:none;
+}
+
+.event-list li{
+    padding:6px 0;
+}
+
+.event-label{
+    font-weight:bold;
+    text-decoration:underline;
+}
+
+.event-note{
+    color:#c03e30;
+    font-weight:bold;
+    font-style:italic;
+}
+
+.service-project-desc{
+    display:block;
+    font-size:13px;
+    color:#4a4a4a;
+    margin-top:2px;
+}
+
+.feature-title{
+    text-align:center;
+    font-weight:bold;
+    font-size:24px;
+    font-family:"Times New Roman", Times, serif;
+    font-style:italic;
+    color:#284FA1;
+    margin-bottom:10px;
+}
+
+.announcement-list li{
+    margin-bottom:16px;
+}
+
+.announcement-list li:last-child{
+    margin-bottom:0;
+}
+
+.announcement-image{
+    display:block;
+    max-width:100%;
+    margin-top:8px;
+}
+
+.info-title{
+    text-align:center;
+    font-weight:bold;
+    font-size:16px;
+    letter-spacing:.5px;
+    margin-bottom:8px;
+}
+
+.evergreen-image{
+    display:block;
+    max-width:120px;
+    max-height:120px;
+    margin:0 auto 10px;
+}
+
+.footer{
+    text-align:center;
+    font-size:12px;
+    color:#666;
+    padding:20px;
+}
+
+.footer a{
+    color:#36495F;
+}
+
+.loading, .error{
+    text-align:center;
+    padding:60px 20px;
+    color:#666;
+}
+
+@media print{
+    .toolbar{ display:none; }
+    body{ background:white; }
+    .page{ margin:0; padding:0; max-width:100%; }
+    .shell{ border:none; }
+}
+</style>
+
+</head>
+<body>
+
+<div class="toolbar">
+<a href="../index.html">&larr; Back to Troop 8 Home</a> |
+<button type="button" id="download-html-btn">Download HTML</button> |
+<button type="button" id="download-pdf-btn">Download PDF</button> |
+<a href="editor.html">Edit This Newsletter</a>
+</div>
+
+<div class="page">
+<div class="shell" id="shell">
+<p class="loading">Loading newsletter…</p>
+</div>
+</div>
+
+<script>
+var IMAGE_BASE_URL = "https://troop8-chatham.org/";
+
+function escapeHtml(str){
+    return String(str === undefined || str === null ? "" : str).replace(/[&<>"']/g, function(c){
+        return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+}
+
+async function loadJSON(path){
+    const res = await fetch(path);
+    if(!res.ok) throw new Error("Failed to load " + path);
+    return res.json();
+}
+
+function renderSPL(data){
+    return (
+        '<div class="section">' +
+        '<p class="section-title">SPL Message</p>' +
+        '<p>' + escapeHtml(data.splMessage) + '</p>' +
+        '</div>'
+    );
+}
+
+function renderTopOfMind(data){
+    const items = (data.topOfMind || []).map(function(item){
+        return (
+            '<li>*) <span class="event-label">' + escapeHtml(item.label) + ':</span> ' + escapeHtml(item.date) +
+            (item.note ? ' <span class="event-note">' + escapeHtml(item.note) + '</span>' : '') +
+            '</li>'
+        );
+    }).join("");
+    return (
+        '<div class="section band">' +
+        '<p class="section-title">TOP OF MIND</p>' +
+        '<ul class="event-list">' + items + '</ul>' +
+        '</div>'
+    );
+}
+
+function resolveNewsletterImage(src, newsletterBase){
+    if(!src) return "";
+    if(/^(https?:|data:)/i.test(src)) return src;
+    return newsletterBase + src;
+}
+
+function renderServiceProjects(data, newsletterBase){
+    if(!data.serviceProjects || !data.serviceProjects.length) return "";
+    const items = data.serviceProjects.map(function(item){
+        return (
+            '<li>*) <span class="event-label">' + escapeHtml(item.title) + ':</span> ' + escapeHtml(item.date) +
+            (item.description ? '<span class="service-project-desc">' + escapeHtml(item.description) + '</span>' : '') +
+            (item.image ? '<img class="announcement-image" src="' + escapeHtml(resolveNewsletterImage(item.image, newsletterBase)) + '" alt="' + escapeHtml(item.title) + '">' : '') +
+            '</li>'
+        );
+    }).join("");
+    return (
+        '<div class="section band">' +
+        '<p class="section-title">UPCOMING SERVICE PROJECTS</p>' +
+        '<ul class="event-list">' + items + '</ul>' +
+        '</div>'
+    );
+}
+
+function renderSpotlight(item, newsletterBase){
+    return (
+        '<div class="section">' +
+        '<p class="feature-title">' + escapeHtml(item.title) + '</p>' +
+        '<p>' + escapeHtml(item.body) + '</p>' +
+        (item.image ? '<img class="announcement-image" src="' + escapeHtml(resolveNewsletterImage(item.image, newsletterBase)) + '" alt="' + escapeHtml(item.title) + '">' : '') +
+        '</div>'
+    );
+}
+
+function renderAnnouncements(data, newsletterBase){
+    if(!data.announcements || !data.announcements.length) return "";
+    const items = data.announcements.map(function(item){
+        const entry = typeof item === "string" ? { text: item } : item;
+        return (
+            '<li>' + escapeHtml(entry.text) +
+            (entry.image ? '<img class="announcement-image" src="' + escapeHtml(resolveNewsletterImage(entry.image, newsletterBase)) + '" alt="' + escapeHtml(entry.text) + '">' : '') +
+            '</li>'
+        );
+    }).join("");
+    return (
+        '<div class="section">' +
+        '<p class="section-title">ADDITIONAL ANNOUNCEMENTS</p>' +
+        '<ul class="announcement-list">' + items + '</ul>' +
+        '</div>'
+    );
+}
+
+function renderEvergreenSection(section, newsletterBase){
+    return (
+        '<div class="section">' +
+        '<p class="info-title">' + escapeHtml(section.title.toUpperCase()) + '</p>' +
+        (section.image ? '<img class="evergreen-image" src="' + escapeHtml(resolveNewsletterImage(section.image, newsletterBase)) + '" alt="' + escapeHtml(section.title) + '">' : '') +
+        '<p>' + escapeHtml(section.body) + '</p>' +
+        '</div>'
+    );
+}
+
+function renderFooter(evergreen){
+    if(!evergreen.footer) return "";
+    const f = evergreen.footer;
+    return (
+        '<div class="footer">' +
+        '<p>' + escapeHtml(f.address) + '</p>' +
+        (f.websiteUrl ? '<p><a href="' + escapeHtml(f.websiteUrl) + '" target="_blank">' + escapeHtml(f.websiteLabel || f.websiteUrl) + '</a></p>' : '') +
+        '</div>'
+    );
+}
+
+function buildShellHtml(data, evergreen, imageBase, newsletterBase){
+    let html = "";
+    html += '<img class="banner" src="' + imageBase + 'images/troop8-logo.jpg" alt="Troop 8 Chatham Logo">';
+    html += '<p class="issue-date">' + escapeHtml(data.displayDate) + '</p>';
+    html += renderSPL(data);
+    html += '<div class="divider"></div>';
+    html += renderTopOfMind(data);
+    html += '<div class="divider"></div>';
+    (data.spotlights || []).forEach(function(item){
+        html += renderSpotlight(item, newsletterBase);
+        html += '<div class="divider"></div>';
+    });
+    const serviceProjectsHtml = renderServiceProjects(data, newsletterBase);
+    if(serviceProjectsHtml){
+        html += serviceProjectsHtml;
+        html += '<div class="divider"></div>';
+    }
+    const announcementsHtml = renderAnnouncements(data, newsletterBase);
+    if(announcementsHtml){
+        html += announcementsHtml;
+        html += '<div class="divider"></div>';
+    }
+    (evergreen.sections || []).forEach(function(section){
+        html += renderEvergreenSection(section, newsletterBase);
+        html += '<div class="divider"></div>';
+    });
+    html += renderFooter(evergreen);
+    return html;
+}
+
+let currentData = null;
+let currentEvergreen = null;
+
+async function init(){
+    const shell = document.getElementById("shell");
+    try {
+        const [data, evergreen] = await Promise.all([
+            loadJSON("data.json"),
+            loadJSON("evergreen.json")
+        ]);
+        currentData = data;
+        currentEvergreen = evergreen;
+        document.title = "Troop 8 Weekly Newsletter — " + (data.displayDate || "");
+        shell.innerHTML = buildShellHtml(data, evergreen, "../", "");
+    } catch(err){
+        shell.innerHTML = '<p class="error">Sorry, the newsletter couldn\'t be loaded right now.</p>';
+        console.error(err);
+    }
+}
+
+function triggerDownload(filename, content, mimeType){
+    const blob = new Blob([content], { type: mimeType });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
+
+document.getElementById("download-html-btn").addEventListener("click", function(){
+    if(!currentData || !currentEvergreen) return;
+    const styleEl = document.querySelector("style");
+    const bodyHtml = buildShellHtml(currentData, currentEvergreen, IMAGE_BASE_URL, IMAGE_BASE_URL + "newsletter/");
+    const doc =
+        '<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="UTF-8">\n' +
+        '<title>Troop 8 Weekly Newsletter — ' + escapeHtml(currentData.displayDate || "") + '</title>\n' +
+        '<style>' + styleEl.textContent + '</style>\n</head>\n<body>\n' +
+        '<div class="page"><div class="shell">' + bodyHtml + '</div></div>\n' +
+        '</body>\n</html>\n';
+    const dateSlug = (currentData.displayDate || "newsletter").replace(/[^a-z0-9]+/gi, "-").toLowerCase();
+    triggerDownload("troop8-newsletter-" + dateSlug + ".html", doc, "text/html");
+});
+
+document.getElementById("download-pdf-btn").addEventListener("click", function(){
+    window.print();
+});
+
+init();
+</script>
+
+</body>
+</html>

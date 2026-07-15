@@ -1,0 +1,39 @@
+{
+  "sections": [
+    {
+      "title": "Process for Merit Badges",
+      "body": "Would you like to earn a merit badge? Email Mr. Kamionek (troop8mbc@gmail.com) to request a merit badge blue card. Looking for your first Merit Badge? Try Reading, Pets or Coin Collecting.",
+      "image": "images/merit-badges.jpg"
+    },
+    {
+      "title": "Positions of Responsibility (PORs)",
+      "body": "There are a number of positions of responsibility (PORs) that need to be filled for a boy-run troop to run effectively. Younger scouts are encouraged to take on non-leadership PORs, while older and more experienced scouts are encouraged to take PORs with more leadership responsibilities (PL, APL, TG, QM, etc.).",
+      "image": "images/positions-of-responsibility.png"
+    },
+    {
+      "title": "Process for Boards of Review",
+      "body": "Volunteers are needed for Boards of Review. The BOR meets once per month, usually on the second Monday of the month; additional sessions can be scheduled if needed. Contact Cate Hartzell (cate.hartzell@gmail.com, 908-208-0740) for more information, or Scoutmaster Mr. Brockmeyer if you need a Board of Review.",
+      "image": "images/boards-of-review.jpg"
+    },
+    {
+      "title": "Troop 8 on Facebook",
+      "body": "Join the Troop 8 Campout group on Facebook — a closed group for scouts, scouters, and parents associated with Troop 8, used for Troop 8 events and activities only. Send a friend request to \"Troop 8, Chatham NJ, Campouts\" to join, and 'like' the Troop 8 public Facebook page to help expand our reach.",
+      "image": "images/facebook.png"
+    },
+    {
+      "title": "BSA Medical Forms",
+      "body": "Return completed forms to Mr. Sean Dailey (seandailey@verizon.net) or the ASM in charge of the event that needs them. For outings shorter than 3 days, only Parts A & B are required. For longer outings (3+ days), Part C is also needed, which requires a medical exam and doctor's signature.",
+      "image": "images/medical-forms.png"
+    },
+    {
+      "title": "Process for Reimbursement or Payments",
+      "body": "Reimbursement requests should be directed to Lisa Lyng (lisa.lyng@gmail.com). Payments to Troop 8 can be made via Zelle (zelle.troop8@gmail.com) or Venmo (@Troop-Eight-1, code 3140). Note your name and what the payment is for in the memo.",
+      "image": "images/reimbursement.jpg"
+    }
+  ],
+  "footer": {
+    "address": "Chatham Troop 8 | 286 Main St. | Chatham, NJ 07928",
+    "websiteLabel": "Troop 8 Website",
+    "websiteUrl": "https://tmweb.troopmaster.com/Website/Home"
+  }
+}

@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Newsletter Editor — Troop 8 Chatham, NJ</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f4f4f4;
+    color:#333;
+    line-height:1.5;
+}
+
+.hero{
+    background:#234b79;
+    color:white;
+    text-align:center;
+    padding:35px 20px;
+}
+
+.hero h1{
+    font-size:28px;
+    margin-bottom:6px;
+}
+
+.hero p{
+    font-size:15px;
+    opacity:.9;
+}
+
+.back-link{
+    display:inline-block;
+    margin-top:14px;
+    color:white;
+    text-decoration:underline;
+    font-size:14px;
+}
+
+.container{
+    max-width:800px;
+    margin:auto;
+    padding:30px 25px 80px;
+}
+
+.instructions{
+    background:#e5edf7;
+    border-left:5px solid #234b79;
+    padding:18px 20px;
+    border-radius:6px;
+    margin-bottom:25px;
+    font-size:14px;
+}
+
+.instructions ol{
+    margin:10px 0 0 20px;
+}
+
+.card{
+    background:white;
+    border-radius:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,.1);
+    padding:25px;
+    margin-bottom:22px;
+}
+
+.card h2{
+    color:#234b79;
+    margin-bottom:15px;
+    font-size:20px;
+}
+
+label{
+    display:block;
+    font-weight:bold;
+    font-size:13px;
+    margin-bottom:5px;
+    margin-top:14px;
+}
+
+label:first-child{
+    margin-top:0;
+}
+
+input[type=text], input[type=date], textarea{
+    width:100%;
+    padding:9px 10px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    font-family:inherit;
+    font-size:14px;
+}
+
+textarea{
+    min-height:80px;
+    resize:vertical;
+}
+
+.repeat-item{
+    border:1px solid #e0e0e0;
+    border-radius:8px;
+    padding:14px;
+    margin-bottom:12px;
+    position:relative;
+}
+
+.remove-btn{
+    position:absolute;
+    top:10px;
+    right:10px;
+    background:#c03e30;
+    color:white;
+    border:none;
+    border-radius:5px;
+    padding:4px 9px;
+    font-size:12px;
+    cursor:pointer;
+}
+
+.add-btn{
+    background:#234b79;
+    color:white;
+    border:none;
+    border-radius:6px;
+    padding:9px 16px;
+    font-size:14px;
+    cursor:pointer;
+    margin-top:4px;
+}
+
+.add-btn:hover, .remove-btn:hover{
+    opacity:.85;
+}
+
+.generate-btn{
+    display:block;
+    width:100%;
+    background:#234b79;
+    color:white;
+    border:none;
+    border-radius:8px;
+    padding:16px;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+.generate-btn:hover{
+    background:#1b3a5f;
+}
+
+.output-card{
+    display:none;
+}
+
+.output-card textarea{
+    min-height:220px;
+    font-family:monospace;
+    font-size:12px;
+}
+
+.output-actions{
+    display:flex;
+    gap:10px;
+    margin-top:12px;
+}
+
+.output-actions button{
+    flex:1;
+    padding:12px;
+    border:none;
+    border-radius:6px;
+    font-size:14px;
+    cursor:pointer;
+    background:#234b79;
+    color:white;
+}
+
+.output-actions button:hover{
+    background:#1b3a5f;
+}
+
+.copy-status{
+    text-align:center;
+    font-size:13px;
+    color:#2a8f4f;
+    margin-top:8px;
+    min-height:16px;
+}
+
+footer{
+    background:#234b79;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+footer a{
+    color:white;
+}
+
+.gate{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#234b79;
+    padding:20px;
+}
+
+.gate-box{
+    background:white;
+    border-radius:10px;
+    padding:35px 30px;
+    max-width:340px;
+    width:100%;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+}
+
+.gate-box h1{
+    color:#234b79;
+    font-size:20px;
+    margin-bottom:6px;
+}
+
+.gate-box p{
+    font-size:13px;
+    color:#666;
+    margin-bottom:18px;
+}
+
+.gate-box input[type=password]{
+    width:100%;
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    font-size:15px;
+    margin-bottom:12px;
+}
+
+.gate-box button{
+    width:100%;
+    background:#234b79;
+    color:white;
+    border:none;
+    border-radius:6px;
+    padding:11px;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.gate-box button:hover{
+    background:#1b3a5f;
+}
+
+.gate-error{
+    color:#c03e30;
+    font-size:13px;
+    margin-top:10px;
+    min-height:16px;
+}
+
+.image-preview{
+    display:block;
+    max-width:160px;
+    max-height:160px;
+    border-radius:6px;
+    margin-top:8px;
+}
+
+.image-hint{
+    font-size:12px;
+    color:#888;
+    margin-top:4px;
+}
+</style>
+
+</head>
+<body>
+
+<div class="gate" id="gate">
+<div class="gate-box">
+<h1>Authorized Users Only</h1>
+<p>Enter the newsletter editor password to continue.</p>
+<input type="password" id="gate-password" placeholder="Password">
+<button type="button" id="gate-submit">Unlock</button>
+<p class="gate-error" id="gate-error"></p>
+</div>
+</div>
+
+<div id="app-content" style="display:none;">
+
+<div class="hero">
+<h1>Newsletter Editor</h1>
+<p>Fill this out each week, then save the result as <code>newsletter/data.json</code></p>
+<a class="back-link" href="index.html">&larr; Back to Newsletter</a>
+</div>
+
+<div class="container">
+
+<div class="instructions">
+This form only creates <strong>this week's</strong> content (SPL message, events, spotlights, announcements). Standing info like payment methods or medical forms lives in <code>newsletter/evergreen.json</code> and rarely needs to change.
+<ol>
+<li>Fill in the fields below.</li>
+<li>Click <strong>Generate data.json</strong>.</li>
+<li>Click <strong>Download data.json</strong> (or copy the text) and save it over <code>newsletter/data.json</code> in the troop8 repo.</li>
+<li>Commit &amp; push (e.g. in GitHub Desktop) — the site updates automatically.</li>
+</ol>
+</div>
+
+<form id="newsletter-form">
+
+<div class="card">
+<h2>Issue Info</h2>
+<label for="displayDate">Newsletter Date</label>
+<input type="text" id="displayDate" placeholder="e.g. July 19, 2026">
+</div>
+
+<div class="card">
+<h2>SPL Message</h2>
+<label for="splName">SPL Name</label>
+<input type="text" id="splName" placeholder="e.g. Riyaan Rath">
+<label for="splMessage">Message</label>
+<textarea id="splMessage" placeholder="Hey Scouts, ..."></textarea>
+</div>
+
+<div class="card">
+<h2>Top of Mind (Upcoming Events)</h2>
+<div id="events-list"></div>
+<button type="button" class="add-btn" id="add-event">+ Add Event</button>
+</div>
+
+<div class="card">
+<h2>Upcoming Service Projects</h2>
+<div id="service-projects-list"></div>
+<button type="button" class="add-btn" id="add-service-project">+ Add Service Project</button>
+</div>
+
+<div class="card">
+<h2>Spotlight Items</h2>
+<div id="spotlights-list"></div>
+<button type="button" class="add-btn" id="add-spotlight">+ Add Spotlight</button>
+</div>
+
+<div class="card">
+<h2>Additional Announcements</h2>
+<div id="announcements-list"></div>
+<button type="button" class="add-btn" id="add-announcement">+ Add Announcement</button>
+</div>
+
+<button type="button" class="generate-btn" id="generate-btn">Generate data.json</button>
+
+</form>
+
+<div class="card output-card" id="output-card">
+<h2>Generated data.json</h2>
+<textarea id="output" readonly></textarea>
+<div class="output-actions">
+<button type="button" id="copy-btn">Copy to Clipboard</button>
+<button type="button" id="download-btn">Download data.json</button>
+</div>
+<p class="copy-status" id="copy-status"></p>
+</div>
+
+</div>
+
+<footer>
+<a href="index.html">View Current Newsletter</a>
+</footer>
+
+</div>
+
+<script>
+var PASSWORD_HASH = "87e6a12b084552369c6cff2a1e501ae31eeff38b96f55cb41e281dcad3f7950e";
+var AUTH_KEY = "troop8-newsletter-editor-auth";
+
+async function sha256Hex(text){
+    const enc = new TextEncoder().encode(text);
+    const buf = await crypto.subtle.digest("SHA-256", enc);
+    return Array.prototype.map.call(new Uint8Array(buf), function(b){ return b.toString(16).padStart(2, "0"); }).join("");
+}
+
+function unlockApp(){
+    document.getElementById("gate").style.display = "none";
+    document.getElementById("app-content").style.display = "block";
+}
+
+async function tryUnlock(){
+    const input = document.getElementById("gate-password").value;
+    const hash = await sha256Hex(input);
+    if(hash === PASSWORD_HASH){
+        localStorage.setItem(AUTH_KEY, "1");
+        unlockApp();
+    } else {
+        document.getElementById("gate-error").textContent = "Incorrect password.";
+    }
+}
+
+document.getElementById("gate-submit").addEventListener("click", tryUnlock);
+document.getElementById("gate-password").addEventListener("keydown", function(e){
+    if(e.key === "Enter") tryUnlock();
+});
+
+if(localStorage.getItem(AUTH_KEY) === "1"){
+    unlockApp();
+}
+
+function makeRemovable(container, node){
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "remove-btn";
+    btn.textContent = "Remove";
+    btn.addEventListener("click", function(){ node.remove(); });
+    node.appendChild(btn);
+    container.appendChild(node);
+}
+
+function addEventRow(prefill){
+    prefill = prefill || {};
+    const container = document.getElementById("events-list");
+    const row = document.createElement("div");
+    row.className = "repeat-item";
+    row.innerHTML =
+        '<label>Label</label>' +
+        '<input type="text" class="event-label" placeholder="e.g. Troop 8 Meeting" value="' + (prefill.label || "") + '">' +
+        '<label>Date</label>' +
+        '<input type="text" class="event-date" placeholder="e.g. July 20, 2026" value="' + (prefill.date || "") + '">' +
+        '<label>Note (optional)</label>' +
+        '<input type="text" class="event-note" placeholder="e.g. LAST MEETING OF THE YEAR!" value="' + (prefill.note || "") + '">';
+    makeRemovable(container, row);
+}
+
+function imageFieldHtml(){
+    return (
+        '<label>Image (optional)</label>' +
+        '<input type="file" class="row-image-file" accept="image/*">' +
+        '<img class="image-preview" style="display:none;">' +
+        '<p class="image-hint">or paste an image URL instead</p>' +
+        '<input type="text" class="row-image-url" placeholder="https://... or images/your-file.jpg">'
+    );
+}
+
+function wireImageField(row){
+    const fileInput = row.querySelector(".row-image-file");
+    const urlInput = row.querySelector(".row-image-url");
+    const preview = row.querySelector(".image-preview");
+    fileInput.addEventListener("change", function(){
+        const file = fileInput.files[0];
+        if(!file) return;
+        const reader = new FileReader();
+        reader.onload = function(){
+            urlInput.value = reader.result;
+            preview.src = reader.result;
+            preview.style.display = "block";
+        };
+        reader.readAsDataURL(file);
+    });
+}
+
+function addSpotlightRow(prefill){
+    prefill = prefill || {};
+    const container = document.getElementById("spotlights-list");
+    const row = document.createElement("div");
+    row.className = "repeat-item";
+    row.innerHTML =
+        '<label>Title</label>' +
+        '<input type="text" class="spotlight-title" placeholder="e.g. Summer Camp Update" value="' + (prefill.title || "") + '">' +
+        '<label>Body</label>' +
+        '<textarea class="spotlight-body" placeholder="Details...">' + (prefill.body || "") + '</textarea>' +
+        imageFieldHtml();
+    wireImageField(row);
+    makeRemovable(container, row);
+}
+
+function addServiceProjectRow(prefill){
+    prefill = prefill || {};
+    const container = document.getElementById("service-projects-list");
+    const row = document.createElement("div");
+    row.className = "repeat-item";
+    row.innerHTML =
+        '<label>Title</label>' +
+        '<input type="text" class="sp-title" placeholder="e.g. Trail Cleanup Day" value="' + (prefill.title || "") + '">' +
+        '<label>Date</label>' +
+        '<input type="text" class="sp-date" placeholder="e.g. August 15, 2026" value="' + (prefill.date || "") + '">' +
+        '<label>Description (optional)</label>' +
+        '<textarea class="sp-description" placeholder="Meeting spot, what to bring, contact...">' + (prefill.description || "") + '</textarea>' +
+        imageFieldHtml();
+    wireImageField(row);
+    makeRemovable(container, row);
+}
+
+function addAnnouncementRow(prefill){
+    prefill = prefill || {};
+    const container = document.getElementById("announcements-list");
+    const row = document.createElement("div");
+    row.className = "repeat-item";
+    row.innerHTML =
+        '<label>Announcement</label>' +
+        '<textarea class="announcement-text" placeholder="e.g. Return Troop Gear...">' + (prefill.text || "") + '</textarea>' +
+        imageFieldHtml();
+    wireImageField(row);
+    makeRemovable(container, row);
+}
+
+document.getElementById("add-event").addEventListener("click", function(){ addEventRow(); });
+document.getElementById("add-service-project").addEventListener("click", function(){ addServiceProjectRow(); });
+document.getElementById("add-spotlight").addEventListener("click", function(){ addSpotlightRow(); });
+document.getElementById("add-announcement").addEventListener("click", function(){ addAnnouncementRow(); });
+
+addEventRow();
+addServiceProjectRow();
+addSpotlightRow();
+addAnnouncementRow();
+
+function collectData(){
+    const events = Array.prototype.map.call(document.querySelectorAll("#events-list .repeat-item"), function(row){
+        const label = row.querySelector(".event-label").value.trim();
+        const date = row.querySelector(".event-date").value.trim();
+        const note = row.querySelector(".event-note").value.trim();
+        if(!label && !date) return null;
+        const obj = { label: label, date: date };
+        if(note) obj.note = note;
+        return obj;
+    }).filter(Boolean);
+
+    const serviceProjects = Array.prototype.map.call(document.querySelectorAll("#service-projects-list .repeat-item"), function(row){
+        const title = row.querySelector(".sp-title").value.trim();
+        const date = row.querySelector(".sp-date").value.trim();
+        const description = row.querySelector(".sp-description").value.trim();
+        const image = row.querySelector(".row-image-url").value.trim();
+        if(!title && !date) return null;
+        const obj = { title: title, date: date };
+        if(description) obj.description = description;
+        if(image) obj.image = image;
+        return obj;
+    }).filter(Boolean);
+
+    const spotlights = Array.prototype.map.call(document.querySelectorAll("#spotlights-list .repeat-item"), function(row){
+        const title = row.querySelector(".spotlight-title").value.trim();
+        const body = row.querySelector(".spotlight-body").value.trim();
+        const image = row.querySelector(".row-image-url").value.trim();
+        if(!title && !body) return null;
+        const obj = { title: title, body: body };
+        if(image) obj.image = image;
+        return obj;
+    }).filter(Boolean);
+
+    const announcements = Array.prototype.map.call(document.querySelectorAll("#announcements-list .repeat-item"), function(row){
+        const text = row.querySelector(".announcement-text").value.trim();
+        const image = row.querySelector(".row-image-url").value.trim();
+        if(!text) return null;
+        const obj = { text: text };
+        if(image) obj.image = image;
+        return obj;
+    }).filter(Boolean);
+
+    return {
+        displayDate: document.getElementById("displayDate").value.trim(),
+        splName: document.getElementById("splName").value.trim(),
+        splMessage: document.getElementById("splMessage").value.trim(),
+        topOfMind: events,
+        serviceProjects: serviceProjects,
+        spotlights: spotlights,
+        announcements: announcements
+    };
+}
+
+document.getElementById("generate-btn").addEventListener("click", function(){
+    const data = collectData();
+    const json = JSON.stringify(data, null, 2);
+    document.getElementById("output").value = json;
+    document.getElementById("output-card").style.display = "block";
+    document.getElementById("output-card").scrollIntoView({ behavior: "smooth" });
+});
+
+document.getElementById("copy-btn").addEventListener("click", function(){
+    const output = document.getElementById("output");
+    output.select();
+    navigator.clipboard.writeText(output.value).then(function(){
+        document.getElementById("copy-status").textContent = "Copied to clipboard!";
+        setTimeout(function(){ document.getElementById("copy-status").textContent = ""; }, 2500);
+    });
+});
+
+document.getElementById("download-btn").addEventListener("click", function(){
+    const json = document.getElementById("output").value;
+    const blob = new Blob([json], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "data.json";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+});
+</script>
+
+</body>
+</html>
