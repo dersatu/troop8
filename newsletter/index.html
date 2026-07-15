@@ -195,10 +195,85 @@ a{
     .page{ margin:0; padding:0; max-width:100%; }
     .shell{ border:none; }
 }
+
+.gate{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#234b79;
+    padding:20px;
+}
+
+.gate-box{
+    background:white;
+    border-radius:10px;
+    padding:35px 30px;
+    max-width:340px;
+    width:100%;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+}
+
+.gate-box h1{
+    color:#234b79;
+    font-size:20px;
+    margin-bottom:6px;
+}
+
+.gate-box p{
+    font-size:13px;
+    color:#666;
+    margin-bottom:18px;
+}
+
+.gate-box input[type=password]{
+    width:100%;
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    font-size:15px;
+    margin-bottom:12px;
+}
+
+.gate-box button{
+    width:100%;
+    background:#234b79;
+    color:white;
+    border:none;
+    border-radius:6px;
+    padding:11px;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.gate-box button:hover{
+    background:#1b3a5f;
+}
+
+.gate-error{
+    color:#c03e30;
+    font-size:13px;
+    margin-top:10px;
+    min-height:16px;
+}
 </style>
 
 </head>
 <body>
+
+<div class="gate" id="gate">
+<div class="gate-box">
+<h1>Authorized Users Only</h1>
+<p>Enter the newsletter password to continue.</p>
+<input type="password" id="gate-password" placeholder="Password">
+<button type="button" id="gate-submit">Unlock</button>
+<p class="gate-error" id="gate-error"></p>
+</div>
+</div>
+
+<div id="app-content" style="display:none;">
 
 <div class="toolbar">
 <a href="../index.html">&larr; Back to Troop 8 Home</a> |
@@ -406,8 +481,43 @@ document.getElementById("download-pdf-btn").addEventListener("click", function()
     window.print();
 });
 
-init();
+var PASSWORD_HASH = "87e6a12b084552369c6cff2a1e501ae31eeff38b96f55cb41e281dcad3f7950e";
+var AUTH_KEY = "troop8-newsletter-editor-auth";
+
+async function sha256Hex(text){
+    const enc = new TextEncoder().encode(text);
+    const buf = await crypto.subtle.digest("SHA-256", enc);
+    return Array.prototype.map.call(new Uint8Array(buf), function(b){ return b.toString(16).padStart(2, "0"); }).join("");
+}
+
+function unlockApp(){
+    document.getElementById("gate").style.display = "none";
+    document.getElementById("app-content").style.display = "block";
+    init();
+}
+
+async function tryUnlock(){
+    const input = document.getElementById("gate-password").value;
+    const hash = await sha256Hex(input);
+    if(hash === PASSWORD_HASH){
+        localStorage.setItem(AUTH_KEY, "1");
+        unlockApp();
+    } else {
+        document.getElementById("gate-error").textContent = "Incorrect password.";
+    }
+}
+
+document.getElementById("gate-submit").addEventListener("click", tryUnlock);
+document.getElementById("gate-password").addEventListener("keydown", function(e){
+    if(e.key === "Enter") tryUnlock();
+});
+
+if(localStorage.getItem(AUTH_KEY) === "1"){
+    unlockApp();
+}
 </script>
+
+</div>
 
 </body>
 </html>

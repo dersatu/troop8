@@ -140,6 +140,36 @@ textarea{
     opacity:.85;
 }
 
+.save-btn{
+    display:block;
+    width:100%;
+    background:#2a8f4f;
+    color:white;
+    border:none;
+    border-radius:8px;
+    padding:12px;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+    margin-top:16px;
+}
+
+.save-btn:hover{
+    background:#227741;
+}
+
+.save-btn:disabled{
+    opacity:.6;
+    cursor:default;
+}
+
+.section-status{
+    text-align:center;
+    font-size:13px;
+    margin-top:8px;
+    min-height:16px;
+}
+
 .generate-btn{
     display:block;
     width:100%;
@@ -156,6 +186,11 @@ textarea{
 
 .generate-btn:hover{
     background:#1b3a5f;
+}
+
+.generate-btn:disabled{
+    opacity:.6;
+    cursor:default;
 }
 
 .output-card{
@@ -284,6 +319,13 @@ footer a{
     color:#888;
     margin-top:4px;
 }
+
+.loading-note{
+    text-align:center;
+    color:#666;
+    font-size:14px;
+    padding:20px;
+}
 </style>
 
 </head>
@@ -292,7 +334,7 @@ footer a{
 <div class="gate" id="gate">
 <div class="gate-box">
 <h1>Authorized Users Only</h1>
-<p>Enter the newsletter editor password to continue.</p>
+<p>Enter the newsletter password to continue.</p>
 <input type="password" id="gate-password" placeholder="Password">
 <button type="button" id="gate-submit">Unlock</button>
 <p class="gate-error" id="gate-error"></p>
@@ -303,28 +345,32 @@ footer a{
 
 <div class="hero">
 <h1>Newsletter Editor</h1>
-<p>Fill this out each week, then save the result as <code>newsletter/data.json</code></p>
+<p>Shared draft for this week's newsletter — everyone fills in their own section</p>
 <a class="back-link" href="index.html">&larr; Back to Newsletter</a>
 </div>
 
 <div class="container">
 
 <div class="instructions">
-This form only creates <strong>this week's</strong> content (SPL message, events, spotlights, announcements). Standing info like payment methods or medical forms lives in <code>newsletter/evergreen.json</code> and rarely needs to change.
+This is a <strong>shared draft</strong> — anyone with the password can fill in a section and save it, without touching anyone else's work. Events, service projects, and announcements start pre-filled from last week; just <strong>remove</strong> anything that already happened and <strong>add</strong> anything new.
 <ol>
-<li>Fill in the fields below.</li>
-<li>Click <strong>Generate data.json</strong>.</li>
-<li>Click <strong>Download data.json</strong> (or copy the text) and save it over <code>newsletter/data.json</code> in the troop8 repo.</li>
-<li>Commit &amp; push (e.g. in GitHub Desktop) — the site updates automatically.</li>
+<li>Fill in or update a section below.</li>
+<li>Click that section's <strong>Save</strong> button — it saves just that section to the shared draft.</li>
+<li>The whole draft publishes automatically <strong>Sunday at 8:00 PM</strong>. It resets for the next week <strong>Tuesday at 8:00 AM</strong>.</li>
+<li>Need it live sooner? Use <strong>Publish Now</strong> at the bottom.</li>
 </ol>
 </div>
 
-<form id="newsletter-form">
+<p class="loading-note" id="loading-note">Loading shared draft…</p>
+
+<form id="newsletter-form" style="display:none;">
 
 <div class="card">
 <h2>Issue Info</h2>
 <label for="displayDate">Newsletter Date</label>
 <input type="text" id="displayDate" placeholder="e.g. July 19, 2026">
+<button type="button" class="save-btn" data-section="displayDate">Save Date</button>
+<p class="section-status" id="status-displayDate"></p>
 </div>
 
 <div class="card">
@@ -333,38 +379,55 @@ This form only creates <strong>this week's</strong> content (SPL message, events
 <input type="text" id="splName" placeholder="e.g. Riyaan Rath">
 <label for="splMessage">Message</label>
 <textarea id="splMessage" placeholder="Hey Scouts, ..."></textarea>
+<button type="button" class="save-btn" id="save-spl">Save SPL Message</button>
+<p class="section-status" id="status-spl"></p>
 </div>
 
 <div class="card">
 <h2>Top of Mind (Upcoming Events)</h2>
 <div id="events-list"></div>
 <button type="button" class="add-btn" id="add-event">+ Add Event</button>
+<button type="button" class="save-btn" data-section="topOfMind">Save Events</button>
+<p class="section-status" id="status-topOfMind"></p>
 </div>
 
 <div class="card">
 <h2>Upcoming Service Projects</h2>
 <div id="service-projects-list"></div>
 <button type="button" class="add-btn" id="add-service-project">+ Add Service Project</button>
+<button type="button" class="save-btn" data-section="serviceProjects">Save Service Projects</button>
+<p class="section-status" id="status-serviceProjects"></p>
 </div>
 
 <div class="card">
 <h2>Spotlight Items</h2>
 <div id="spotlights-list"></div>
 <button type="button" class="add-btn" id="add-spotlight">+ Add Spotlight</button>
+<button type="button" class="save-btn" data-section="spotlights">Save Spotlights</button>
+<p class="section-status" id="status-spotlights"></p>
 </div>
 
 <div class="card">
 <h2>Additional Announcements</h2>
 <div id="announcements-list"></div>
 <button type="button" class="add-btn" id="add-announcement">+ Add Announcement</button>
+<button type="button" class="save-btn" data-section="announcements">Save Announcements</button>
+<p class="section-status" id="status-announcements"></p>
 </div>
 
-<button type="button" class="generate-btn" id="generate-btn">Generate data.json</button>
+<div class="card">
+<h2>Publish Now</h2>
+<p style="font-size:13px;color:#666;margin-bottom:10px;">This normally happens automatically Sunday at 8:00 PM. Use this only if you need the site updated sooner.</p>
+<button type="button" class="generate-btn" id="publish-btn">Publish Now</button>
+<p class="copy-status" id="publish-status"></p>
+</div>
+
+<button type="button" class="generate-btn" id="generate-btn" style="background:#666;">Download Current Draft as JSON (backup)</button>
 
 </form>
 
 <div class="card output-card" id="output-card">
-<h2>Generated data.json</h2>
+<h2>Draft JSON (backup)</h2>
 <textarea id="output" readonly></textarea>
 <div class="output-actions">
 <button type="button" id="copy-btn">Copy to Clipboard</button>
@@ -383,7 +446,8 @@ This form only creates <strong>this week's</strong> content (SPL message, events
 
 <script>
 var PASSWORD_HASH = "87e6a12b084552369c6cff2a1e501ae31eeff38b96f55cb41e281dcad3f7950e";
-var AUTH_KEY = "troop8-newsletter-editor-auth";
+var WORKER_BASE = "https://throbbing-wildflower-b6e8.landonoliverw.workers.dev";
+var sessionPassword = null;
 
 async function sha256Hex(text){
     const enc = new TextEncoder().encode(text);
@@ -394,13 +458,14 @@ async function sha256Hex(text){
 function unlockApp(){
     document.getElementById("gate").style.display = "none";
     document.getElementById("app-content").style.display = "block";
+    loadDraft();
 }
 
 async function tryUnlock(){
     const input = document.getElementById("gate-password").value;
     const hash = await sha256Hex(input);
     if(hash === PASSWORD_HASH){
-        localStorage.setItem(AUTH_KEY, "1");
+        sessionPassword = input;
         unlockApp();
     } else {
         document.getElementById("gate-error").textContent = "Incorrect password.";
@@ -412,8 +477,10 @@ document.getElementById("gate-password").addEventListener("keydown", function(e)
     if(e.key === "Enter") tryUnlock();
 });
 
-if(localStorage.getItem(AUTH_KEY) === "1"){
-    unlockApp();
+function escapeAttr(str){
+    return String(str === undefined || str === null ? "" : str).replace(/[&<>"']/g, function(c){
+        return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
 }
 
 function makeRemovable(container, node){
@@ -433,21 +500,22 @@ function addEventRow(prefill){
     row.className = "repeat-item";
     row.innerHTML =
         '<label>Label</label>' +
-        '<input type="text" class="event-label" placeholder="e.g. Troop 8 Meeting" value="' + (prefill.label || "") + '">' +
+        '<input type="text" class="event-label" placeholder="e.g. Troop 8 Meeting" value="' + escapeAttr(prefill.label) + '">' +
         '<label>Date</label>' +
-        '<input type="text" class="event-date" placeholder="e.g. July 20, 2026" value="' + (prefill.date || "") + '">' +
+        '<input type="text" class="event-date" placeholder="e.g. July 20, 2026" value="' + escapeAttr(prefill.date) + '">' +
         '<label>Note (optional)</label>' +
-        '<input type="text" class="event-note" placeholder="e.g. LAST MEETING OF THE YEAR!" value="' + (prefill.note || "") + '">';
+        '<input type="text" class="event-note" placeholder="e.g. LAST MEETING OF THE YEAR!" value="' + escapeAttr(prefill.note) + '">';
     makeRemovable(container, row);
 }
 
-function imageFieldHtml(){
+function imageFieldHtml(prefillImage){
+    prefillImage = prefillImage || "";
     return (
         '<label>Image (optional)</label>' +
         '<input type="file" class="row-image-file" accept="image/*">' +
-        '<img class="image-preview" style="display:none;">' +
+        '<img class="image-preview" style="' + (prefillImage ? "display:block;" : "display:none;") + '" src="' + escapeAttr(prefillImage) + '">' +
         '<p class="image-hint">or paste an image URL instead</p>' +
-        '<input type="text" class="row-image-url" placeholder="https://... or images/your-file.jpg">'
+        '<input type="text" class="row-image-url" placeholder="https://... or images/your-file.jpg" value="' + escapeAttr(prefillImage) + '">'
     );
 }
 
@@ -475,10 +543,10 @@ function addSpotlightRow(prefill){
     row.className = "repeat-item";
     row.innerHTML =
         '<label>Title</label>' +
-        '<input type="text" class="spotlight-title" placeholder="e.g. Summer Camp Update" value="' + (prefill.title || "") + '">' +
+        '<input type="text" class="spotlight-title" placeholder="e.g. Summer Camp Update" value="' + escapeAttr(prefill.title) + '">' +
         '<label>Body</label>' +
-        '<textarea class="spotlight-body" placeholder="Details...">' + (prefill.body || "") + '</textarea>' +
-        imageFieldHtml();
+        '<textarea class="spotlight-body" placeholder="Details...">' + escapeAttr(prefill.body) + '</textarea>' +
+        imageFieldHtml(prefill.image);
     wireImageField(row);
     makeRemovable(container, row);
 }
@@ -490,25 +558,26 @@ function addServiceProjectRow(prefill){
     row.className = "repeat-item";
     row.innerHTML =
         '<label>Title</label>' +
-        '<input type="text" class="sp-title" placeholder="e.g. Trail Cleanup Day" value="' + (prefill.title || "") + '">' +
+        '<input type="text" class="sp-title" placeholder="e.g. Trail Cleanup Day" value="' + escapeAttr(prefill.title) + '">' +
         '<label>Date</label>' +
-        '<input type="text" class="sp-date" placeholder="e.g. August 15, 2026" value="' + (prefill.date || "") + '">' +
+        '<input type="text" class="sp-date" placeholder="e.g. August 15, 2026" value="' + escapeAttr(prefill.date) + '">' +
         '<label>Description (optional)</label>' +
-        '<textarea class="sp-description" placeholder="Meeting spot, what to bring, contact...">' + (prefill.description || "") + '</textarea>' +
-        imageFieldHtml();
+        '<textarea class="sp-description" placeholder="Meeting spot, what to bring, contact...">' + escapeAttr(prefill.description) + '</textarea>' +
+        imageFieldHtml(prefill.image);
     wireImageField(row);
     makeRemovable(container, row);
 }
 
 function addAnnouncementRow(prefill){
     prefill = prefill || {};
+    if(typeof prefill === "string") prefill = { text: prefill };
     const container = document.getElementById("announcements-list");
     const row = document.createElement("div");
     row.className = "repeat-item";
     row.innerHTML =
         '<label>Announcement</label>' +
-        '<textarea class="announcement-text" placeholder="e.g. Return Troop Gear...">' + (prefill.text || "") + '</textarea>' +
-        imageFieldHtml();
+        '<textarea class="announcement-text" placeholder="e.g. Return Troop Gear...">' + escapeAttr(prefill.text) + '</textarea>' +
+        imageFieldHtml(prefill.image);
     wireImageField(row);
     makeRemovable(container, row);
 }
@@ -518,13 +587,54 @@ document.getElementById("add-service-project").addEventListener("click", functio
 document.getElementById("add-spotlight").addEventListener("click", function(){ addSpotlightRow(); });
 document.getElementById("add-announcement").addEventListener("click", function(){ addAnnouncementRow(); });
 
-addEventRow();
-addServiceProjectRow();
-addSpotlightRow();
-addAnnouncementRow();
+function clearList(id){
+    document.getElementById(id).innerHTML = "";
+}
 
-function collectData(){
-    const events = Array.prototype.map.call(document.querySelectorAll("#events-list .repeat-item"), function(row){
+function populateForm(draft){
+    document.getElementById("displayDate").value = draft.displayDate || "";
+    document.getElementById("splName").value = draft.splName || "";
+    document.getElementById("splMessage").value = draft.splMessage || "";
+
+    clearList("events-list");
+    const events = draft.topOfMind || [];
+    if(events.length){ events.forEach(function(item){ addEventRow(item); }); } else { addEventRow(); }
+
+    clearList("service-projects-list");
+    const serviceProjects = draft.serviceProjects || [];
+    if(serviceProjects.length){ serviceProjects.forEach(function(item){ addServiceProjectRow(item); }); } else { addServiceProjectRow(); }
+
+    clearList("spotlights-list");
+    const spotlights = draft.spotlights || [];
+    if(spotlights.length){ spotlights.forEach(function(item){ addSpotlightRow(item); }); } else { addSpotlightRow(); }
+
+    clearList("announcements-list");
+    const announcements = draft.announcements || [];
+    if(announcements.length){ announcements.forEach(function(item){ addAnnouncementRow(item); }); } else { addAnnouncementRow(); }
+}
+
+async function loadDraft(){
+    const loadingNote = document.getElementById("loading-note");
+    const form = document.getElementById("newsletter-form");
+    try {
+        const res = await fetch(WORKER_BASE + "/draft", {
+            headers: { "X-Editor-Password": sessionPassword }
+        });
+        const result = await res.json();
+        if(!res.ok){
+            loadingNote.textContent = "Error loading draft: " + (result.error || "unknown error");
+            return;
+        }
+        populateForm(result.draft || {});
+        loadingNote.style.display = "none";
+        form.style.display = "block";
+    } catch(err){
+        loadingNote.textContent = "Couldn't reach the draft service. Check your connection and reload.";
+    }
+}
+
+function collectEvents(){
+    return Array.prototype.map.call(document.querySelectorAll("#events-list .repeat-item"), function(row){
         const label = row.querySelector(".event-label").value.trim();
         const date = row.querySelector(".event-date").value.trim();
         const note = row.querySelector(".event-note").value.trim();
@@ -533,8 +643,10 @@ function collectData(){
         if(note) obj.note = note;
         return obj;
     }).filter(Boolean);
+}
 
-    const serviceProjects = Array.prototype.map.call(document.querySelectorAll("#service-projects-list .repeat-item"), function(row){
+function collectServiceProjects(){
+    return Array.prototype.map.call(document.querySelectorAll("#service-projects-list .repeat-item"), function(row){
         const title = row.querySelector(".sp-title").value.trim();
         const date = row.querySelector(".sp-date").value.trim();
         const description = row.querySelector(".sp-description").value.trim();
@@ -545,8 +657,10 @@ function collectData(){
         if(image) obj.image = image;
         return obj;
     }).filter(Boolean);
+}
 
-    const spotlights = Array.prototype.map.call(document.querySelectorAll("#spotlights-list .repeat-item"), function(row){
+function collectSpotlights(){
+    return Array.prototype.map.call(document.querySelectorAll("#spotlights-list .repeat-item"), function(row){
         const title = row.querySelector(".spotlight-title").value.trim();
         const body = row.querySelector(".spotlight-body").value.trim();
         const image = row.querySelector(".row-image-url").value.trim();
@@ -555,8 +669,10 @@ function collectData(){
         if(image) obj.image = image;
         return obj;
     }).filter(Boolean);
+}
 
-    const announcements = Array.prototype.map.call(document.querySelectorAll("#announcements-list .repeat-item"), function(row){
+function collectAnnouncements(){
+    return Array.prototype.map.call(document.querySelectorAll("#announcements-list .repeat-item"), function(row){
         const text = row.querySelector(".announcement-text").value.trim();
         const image = row.querySelector(".row-image-url").value.trim();
         if(!text) return null;
@@ -564,17 +680,127 @@ function collectData(){
         if(image) obj.image = image;
         return obj;
     }).filter(Boolean);
+}
 
+function collectData(){
     return {
         displayDate: document.getElementById("displayDate").value.trim(),
         splName: document.getElementById("splName").value.trim(),
         splMessage: document.getElementById("splMessage").value.trim(),
-        topOfMind: events,
-        serviceProjects: serviceProjects,
-        spotlights: spotlights,
-        announcements: announcements
+        topOfMind: collectEvents(),
+        serviceProjects: collectServiceProjects(),
+        spotlights: collectSpotlights(),
+        announcements: collectAnnouncements()
     };
 }
+
+async function saveSection(section, value, statusEl, button){
+    statusEl.style.color = "#666";
+    statusEl.textContent = "Saving…";
+    if(button) button.disabled = true;
+    try {
+        const res = await fetch(WORKER_BASE + "/section", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ password: sessionPassword, section: section, value: value })
+        });
+        const result = await res.json();
+        if(res.ok && result.success){
+            statusEl.style.color = "#2a8f4f";
+            statusEl.textContent = "Saved!";
+            setTimeout(function(){ statusEl.textContent = ""; }, 3000);
+        } else {
+            statusEl.style.color = "#c03e30";
+            statusEl.textContent = "Error: " + (result.error || "Failed to save.");
+        }
+    } catch(err){
+        statusEl.style.color = "#c03e30";
+        statusEl.textContent = "Error: could not reach the draft service.";
+    } finally {
+        if(button) button.disabled = false;
+    }
+}
+
+document.querySelectorAll(".save-btn[data-section]").forEach(function(btn){
+    btn.addEventListener("click", function(){
+        const section = btn.getAttribute("data-section");
+        const statusEl = document.getElementById("status-" + section);
+        let value;
+        if(section === "displayDate") value = document.getElementById("displayDate").value.trim();
+        else if(section === "topOfMind") value = collectEvents();
+        else if(section === "serviceProjects") value = collectServiceProjects();
+        else if(section === "spotlights") value = collectSpotlights();
+        else if(section === "announcements") value = collectAnnouncements();
+        saveSection(section, value, statusEl, btn);
+    });
+});
+
+document.getElementById("save-spl").addEventListener("click", async function(){
+    const btn = this;
+    const statusEl = document.getElementById("status-spl");
+    const splName = document.getElementById("splName").value.trim();
+    const splMessage = document.getElementById("splMessage").value.trim();
+    statusEl.style.color = "#666";
+    statusEl.textContent = "Saving…";
+    btn.disabled = true;
+    try {
+        const results = await Promise.all([
+            fetch(WORKER_BASE + "/section", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ password: sessionPassword, section: "splName", value: splName })
+            }).then(function(r){ return r.json().then(function(j){ return { ok: r.ok, body: j }; }); }),
+            fetch(WORKER_BASE + "/section", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ password: sessionPassword, section: "splMessage", value: splMessage })
+            }).then(function(r){ return r.json().then(function(j){ return { ok: r.ok, body: j }; }); })
+        ]);
+        const failed = results.find(function(r){ return !r.ok || !r.body.success; });
+        if(!failed){
+            statusEl.style.color = "#2a8f4f";
+            statusEl.textContent = "Saved!";
+            setTimeout(function(){ statusEl.textContent = ""; }, 3000);
+        } else {
+            statusEl.style.color = "#c03e30";
+            statusEl.textContent = "Error: " + (failed.body.error || "Failed to save.");
+        }
+    } catch(err){
+        statusEl.style.color = "#c03e30";
+        statusEl.textContent = "Error: could not reach the draft service.";
+    } finally {
+        btn.disabled = false;
+    }
+});
+
+document.getElementById("publish-btn").addEventListener("click", async function(){
+    const statusEl = document.getElementById("publish-status");
+    const publishBtn = this;
+    publishBtn.disabled = true;
+    statusEl.style.color = "#666";
+    statusEl.textContent = "Publishing…";
+
+    try {
+        const res = await fetch(WORKER_BASE + "/publish-now", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ password: sessionPassword })
+        });
+        const result = await res.json();
+        if(res.ok && result.success){
+            statusEl.style.color = "#2a8f4f";
+            statusEl.textContent = "Published! The site will update within about a minute.";
+        } else {
+            statusEl.style.color = "#c03e30";
+            statusEl.textContent = "Error: " + (result.error || "Failed to publish.");
+        }
+    } catch(err){
+        statusEl.style.color = "#c03e30";
+        statusEl.textContent = "Error: could not reach the publish service.";
+    } finally {
+        publishBtn.disabled = false;
+    }
+});
 
 document.getElementById("generate-btn").addEventListener("click", function(){
     const data = collectData();
