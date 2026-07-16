@@ -3,13 +3,36 @@
   "splName": "Riyaan Rath",
   "splMessage": "Hey Scouts,\n\nSummer camp is next week! We have our gear pull on Wednesday at 7PM. Make sure you are there if you are going to summer camp.\n\nYIS,\nRiyaan Rath",
   "topOfMind": [
-    { "label": "Northeast Trek", "date": "July 10-14, 2026" },
-    { "label": "Troop 8 Meeting", "date": "July 13, 2026" },
-    { "label": "Summer Camp Gear Pull", "date": "July 15, 2026" },
-    { "label": "Summer Camp", "date": "July 19-25, 2026" },
-    { "label": "Troop 8 Meeting", "date": "July 26, 2026", "note": "LAST MEETING OF THE YEAR!" },
-    { "label": "Northeast Trek", "date": "August 5-9, 2026" },
-    { "label": "Troop 8 Meeting", "date": "August 31, 2026", "note": "FIRST MEETING OF THE YEAR!" }
+    {
+      "label": "Northeast Trek",
+      "date": "July 10-14, 2026"
+    },
+    {
+      "label": "Troop 8 Meeting",
+      "date": "July 13, 2026"
+    },
+    {
+      "label": "Summer Camp Gear Pull",
+      "date": "July 15, 2026"
+    },
+    {
+      "label": "Summer Camp",
+      "date": "July 19-25, 2026"
+    },
+    {
+      "label": "Troop 8 Meeting",
+      "date": "July 26, 2026",
+      "note": "LAST MEETING OF THE YEAR!"
+    },
+    {
+      "label": "Northeast Trek",
+      "date": "August 5-9, 2026"
+    },
+    {
+      "label": "Troop 8 Meeting",
+      "date": "August 31, 2026",
+      "note": "FIRST MEETING OF THE YEAR!"
+    }
   ],
   "spotlights": [
     {
@@ -47,8 +70,14 @@
   ],
   "serviceProjects": [],
   "announcements": [
-    { "text": "Return Troop Gear: IMPORTANT - Please return any Troop gear in your possession at our next in-person meeting." },
-    { "text": "Changes to BSA rules on Adult Registration for Participation in Meetings and Trips: all adults participating in overnight troop activities must register as ASMs, which includes completion of an application with a criminal background check, mandatory Youth Protection training, and a Volunteer Screening Database check." },
-    { "text": "Recruiting: New scouts are joining Troop 8 every month. If your scout has a friend that would like to learn more about our Troop they are welcome to join any live meeting or upcoming Troop event." }
+    {
+      "text": "Return Troop Gear: IMPORTANT - Please return any Troop gear in your possession at our next in-person meeting."
+    },
+    {
+      "text": "Changes to BSA rules on Adult Registration for Participation in Meetings and Trips: all adults participating in overnight troop activities must register as ASMs, which includes completion of an application with a criminal background check, mandatory Youth Protection training, and a Volunteer Screening Database check."
+    },
+    {
+      "text": "Recruiting: New scouts are joining Troop 8 every month. If your scout has a friend that would like to learn more about our Troop they are welcome to join any live meeting or upcoming Troop event."
+    }
   ]
 }
