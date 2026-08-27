@@ -1,59 +1,38 @@
 {
-  "displayDate": "July 12, 2026",
-  "splName": "Riyaan Rath",
-  "splMessage": "Hey Scouts,\n\nSummer camp is next week! We have our gear pull on Wednesday at 7PM. Make sure you are there if you are going to summer camp.\n\nYIS,\nRiyaan Rath",
+  "displayDate": "August 23, 2026",
+  "splName": "Mr. Brockmeyer",
+  "splMessage": "Hello Troop 8! Hope you all had a great summer and I am looking to hear about the exciting trips and adventures you went on. First meeting of the year is next week, Monday, August 31st at 7pm. We will be in Class A uniforms and run the normal 7-8:30pm meeting time.\n\nPlease if you went home with Troop gear, let's make sure that it finds its way back into the Troop room but more importantly that it goes back into its right in Patrol closets or shelves. Looking forward to the new year.\n\nYIS,\nMr. Brockmeyer",
   "topOfMind": [
-    {
-      "label": "Northeast Trek",
-      "date": "July 10-14, 2026"
-    },
-    {
-      "label": "Troop 8 Meeting",
-      "date": "July 13, 2026"
-    },
-    {
-      "label": "Summer Camp Gear Pull",
-      "date": "July 15, 2026"
-    },
-    {
-      "label": "Summer Camp",
-      "date": "July 19-25, 2026"
-    },
-    {
-      "label": "Troop 8 Meeting",
-      "date": "July 26, 2026",
-      "note": "LAST MEETING OF THE YEAR!"
-    },
-    {
-      "label": "Northeast Trek",
-      "date": "August 5-9, 2026"
-    },
-    {
-      "label": "Troop 8 Meeting",
-      "date": "August 31, 2026",
-      "note": "FIRST MEETING OF THE YEAR!"
-    }
+    { "label": "Troop 8 Meeting", "date": "August 31, 2026", "note": "FIRST MEETING OF THE YEAR!" },
+    { "label": "Troop 8 Meeting", "date": "September 7, 2026" },
+    { "label": "September 11th Memorial", "date": "September 11, 2026", "note": "25th Anniversary — 6pm, more details to be shared later" },
+    { "label": "Eagle Court of Honor", "date": "September 13, 2026", "note": "6pm at Ogden — celebrating Jack Loatman, Aidan Shrekgast, Daniel Steiner" },
+    { "label": "Sea Girt Camping Trip", "date": "September 19-20, 2026" }
   ],
   "spotlights": [
+    {
+      "title": "Popcorn 2026 Scouts!",
+      "body": "Did you know that popcorn sales are the greatest contributor to the overall financial sustainability of Troop 8? By selling popcorn, you allow Troop 8 to have the best equipment and go on the most amazing camping trips each year! Popcorn sales are also a great way to build up your personal Scout account, which you can use to pay for campouts and high adventure trips.\n\nTroop 8 is participating in the Trails End popcorn fundraiser again this year. Returning scouts should log in to their Trails End account on the web (portal.trails-end.com) or via the mobile app. Scouts new to selling popcorn with Troop 8 need to register (or update their registration) with Trails End — be sure your unit code is updated to ZCUXT so you are part of the Troop 8 program.\n\nSend your personal Trails End sales webpage to family and friends to help support you — online sales can start immediately. On the app or website, register for an upcoming Troop 8 storefront sales opportunity starting as early as September 5; multiple storefront shifts are available between now and the end of October.\n\nThis year's Troop 8 goal is to sell $35,000 worth of popcorn. Every Scout is asked to sell at least $150 worth of popcorn — sales above $150 count toward your Scout account, and there are prizes to earn (Amazon gift cards, etc.) along the way. Remember, you aren't selling popcorn, you're selling Scouting. Get out there and sell!\n\nAny questions, contact Mr. Wade (lankfordw@gmail.com — be sure to copy a parent). Unit Code: ZCUXT\n\nYIS,\nMr. Wade"
+    },
+    {
+      "title": "Venture Patrol: Fall Backyard Adventures",
+      "body": "Chicken Bird Dog Squirrel Venture Patrollers! While everyone is focused on their last week of summer break, the Venture Patrol is already turning its focus to firing up the engine on our fall Backyard Adventures series — two epic trips on the horizon.\n\nExpedition Alpha: Leaf Peeping in the St. Regis Canoe Wilderness (Adirondacks, NY). Classic North Country canoeing, multi-pond portaging, and backcountry skills under a canopy of fall foliage. Dates: roll out early Saturday, September 19th, back Monday, September 21st (no school!). Cost: approx. $400 per Venture Patroller. Crew size: 5 scouts & 3 adults (limited by NYSDEC). Note: this trip overlaps directly with Troop 8's Sea Girt campout, so you'll need to choose one.\n\nExpedition Bravo: Whitewater Kayaking at Zoar on the Deerfield River (Charlemont, MA). Navigating Class I-II features (maybe some III's), catching eddies, and progressing skills toward the \"Gap.\" Dates: leave Friday afternoon, October 9th, back late Sunday night, October 11th (no school on 10/12!). Cost: approx. $615 per Venture Patroller. Crew size: 9 scouts & 3 adults.\n\nBecause crew sizes are strictly limited by the NYSDEC and the Zoar outfitters, if you want to claim a spot on either trip (or both), fill out the Google form to express interest or submit a deposit to make a firm commitment. See you on the water.\n\nMr. Erb, Cell: 440.725.0649"
+    },
+    {
+      "title": "Sea Girt Campout — 5th Beach Kickoff",
+      "body": "Saturday, September 19 – Sunday, September 20, 2026.\n\nDeparture: Saturday morning, September 19th from Ogden, 7:08am. Return: Sunday, September 20th, time TBD (estimate noon). Gear Pull: Wednesday, September 16th at 7:08pm at Ogden.\n\nCost: $35 per person. Meals: Scouts should eat before arrival at Ogden on 9/19 or bring a bagged breakfast; Patrols provide Saturday lunch & dinner and Sunday breakfast.\n\nClothing/Special Gear: Proper clothing and beach footwear are a must — bathing suit, sun swim shirt, sunscreen, beach gear, towel, and bug repellent. Dress for cool beach winds; volleyball games likely, and fishing is available with personal surf fishing gear. See the Sea Girt Flyer for more details.\n\nDr. Turbin, ASM — (973) 476-0604, rturbin@verizon.net\nMr. Brockmeyer, ASM — (908) 875-4902, cbrock2002@yahoo.com"
+    },
     {
       "title": "Change to Troop 8 Payment Methods",
       "body": "Going forward the following will be accepted as payments for Troop 8 activities: Zelle, Checks, and Cash.\n\nVenmo is no longer an acceptable method of payment effective immediately.\n\nThank you,\nMr. Brockmeyer"
     },
     {
       "title": "2027 Philmont Scout Reservation",
-      "body": "Troop 8's Philmont 2027 crew has one spot remaining. This is your opportunity to hike, raft and adventure through Philmont Scout Ranch. If you will be 14, First Class ranked or higher, and have or will have successfully completed at least one Northeast Trek, and are interested, please contact Mr. James (bjaust@gmail.com) for details."
-    },
-    {
-      "title": "Troop 8 Summer Camp",
-      "body": "Summer Camp July 19-25, 2026 at Camp Somers. Scouts will enjoy a week canoeing, swimming, playing outdoor games, watching and performing campfire skits, all while earning merit badges. Signup link and more information to follow. For inquiries please reach out to Patricia Hogan (colmmoo@yahoo.com; 201-486-6548)."
+      "body": "Troop 8's Philmont 2027 crew has one spot remaining. This is your opportunity to hike, raft and adventure through Philmont Scout Ranch. If you will be 14, First Class ranked or higher, and have or will have successfully completed at least one Northeast Trek, and are interested, please contact Mr. James (bjaust@gmail.com) for details. Many dangers and adventures await the brave soul who steps forward!"
     },
     {
       "title": "Service Projects",
-      "body": "“Alone we can do so little; together we can do so much.” — Helen Keller\n\nThe 2026 SERV Award year runs from January 1st to December 31, 2026. Check the newsletter often, as it is never too early to start earning service hours for 2026! Scouts will announce ongoing service projects at the meetings. Please support your fellow scouts and the community by volunteering your time!"
-    },
-    {
-      "title": "Eagle Scout Service Project for John Peck",
-      "body": "For my Eagle Scout project, I am creating a new program that will provide free swim lessons and water safety instruction to children who may not otherwise have access to formal swim education. The lessons will take place at Canoe Brook Country Club in partnership with the Canoe Brook Foundation, running for two sessions in May on Saturday mornings, serving between 10 and 30 participants. I will be organizing a team of 10-20 lifeguard-certified volunteer instructors to help. If interested, scouts should fill out the sign-up form."
+      "body": "“Alone we can do so little; together we can do so much.” — Helen Keller\n\nThe 2026 SERV Award year runs from January 1st to December 31, 2026. Check the newsletter often, as it is never too early to start earning service hours for 2026! Scouts will announce ongoing service projects at the meetings. Please support your fellow scouts and the community by volunteering your time!\n\nPlease visit the Service Project page on the Troop 8 website for more information and the updated policy regarding Service Project requirements for Star and Life."
     },
     {
       "title": "Troop 8 Rocketry",
@@ -61,7 +40,7 @@
     },
     {
       "title": "2027 Florida Sea Base Out Island Adventure",
-      "body": "April 10 - April 16, 2027. Contact Mr. Haller at 215.704.7974 (drewhaller@yahoo.com) or Mr. Kamionek at 201.207.5821 (skamionek@gmail.com). Scouts must be First Class and 13 years old by April 10, 2027. This Interest Form must be turned in with a $200 deposit by September 1, 2026. Estimated cost is approximately $2,600."
+      "body": "April 10 – April 16, 2027. Contact Mr. Haller at 215.704.7974 (drewhaller@yahoo.com) or Mr. Kamionek at 201.207.5821 (skamionek@gmail.com).\n\nLive on an island in the Keys for a week like Robinson Crusoe — paddle in 12-foot war canoes to Big Munson Island with all personal gear stowed in a dry bag (5.5 miles over open ocean water, so pack light and come ready to paddle). Days ashore include fishing, snorkeling, and kayaking, sleeping in tents or hammocks, with a seafood luau and patch presentation to close out the trip.\n\nScouts must be First Class and 13 years old by April 10, 2027. This Interest Form must be turned in with a $200 deposit by September 1, 2026 and will be reviewed for eligibility by the Scoutmaster. Estimated cost is approximately $2,600 — Scout (popcorn) accounts can be used to help pay for this trip."
     },
     {
       "title": "New Cell Phone Policy",
@@ -70,14 +49,7 @@
   ],
   "serviceProjects": [],
   "announcements": [
-    {
-      "text": "Return Troop Gear: IMPORTANT - Please return any Troop gear in your possession at our next in-person meeting."
-    },
-    {
-      "text": "Changes to BSA rules on Adult Registration for Participation in Meetings and Trips: all adults participating in overnight troop activities must register as ASMs, which includes completion of an application with a criminal background check, mandatory Youth Protection training, and a Volunteer Screening Database check."
-    },
-    {
-      "text": "Recruiting: New scouts are joining Troop 8 every month. If your scout has a friend that would like to learn more about our Troop they are welcome to join any live meeting or upcoming Troop event."
-    }
+    { "text": "Return Troop Gear: IMPORTANT - Please return any Troop gear in your possession at our next in-person meeting." },
+    { "text": "Recruiting: New scouts are joining Troop 8 every month. If your scout has a friend that would like to learn more about our Troop they are welcome to join any live meeting or upcoming Troop event." }
   ]
 }
